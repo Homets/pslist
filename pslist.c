@@ -2,9 +2,7 @@
 #include <windows.h>
 #include <tlhelp32.h>
 #include <tchar.h>
-#include <time.h>
-#include <processthreadsapi.h>
-
+#include <string.h>
 
 typedef int bool;
 
@@ -12,22 +10,34 @@ int main(int argc, char *argv[])
 {	
 
 	bool show_user = 0;
-	
 	if (argc > 1)
 	{
-		switch (show_user){
-			case '-h':
-				printf(" Usage => pslist.exe [Option]");
-
+		if (strcmp(argv[1], "-h") == 0)
+		{
+			printf("Usage => jfjfkf");
+		} else if (strcmp(argv[1],"-u") == 0)
+		{
+			show_user = 1;
+			if (!argv[2])
+			{
+				printf("Veuillez renseigner un utilisateur avec l'option -u");
+			} else
+			{
+				const char *username = argv[2];
+				GetProcessInfo(username);
+			}
 		}
+		
+	}else
+	{
+		GetProcessInfo();
 	}
-	//GetProcessInfo();
 	return 0;
 }
 
-BOOL GetProcessInfo()
+BOOL GetProcessInfo(const char *username)
 {
-
+	
 	HANDLE hProcessSnap = CreateToolhelp32Snapshot(TH32CS_SNAPALL, 0);
 	if( hProcessSnap == INVALID_HANDLE_VALUE )
   	{
