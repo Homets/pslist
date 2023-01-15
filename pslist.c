@@ -3,19 +3,26 @@
 #include <tlhelp32.h>
 #include <tchar.h>
 #include <string.h>
+#include <stdlib.h>
 
 typedef int bool;
+
+
+extern BOOL singleProcessInfo(DWORD processID);
+
 
 int main(int argc, char *argv[])
 {	
 
 	bool show_user = 0;
+
 	if (argc > 1)
-	{
-		if (strcmp(argv[1], "-h") == 0)
+	{	
+		if (strcmp(argv[1], "-h") == 0) 	//pslist.exe -h
 		{
 			printf("Usage => jfjfkf");
-		} else if (strcmp(argv[1],"-u") == 0)
+
+		} else if (strcmp(argv[1],"-u") == 0) 	//pslist.exe -u username
 		{
 			show_user = 1;
 			if (!argv[2])
@@ -26,9 +33,26 @@ int main(int argc, char *argv[])
 				const char *username = argv[2];
 				GetProcessInfo(username);
 			}
+
+		}else if (strcmp(argv[1], "--module") == 0) 	//pslist.exe -p 105
+		{
+			if (!argv[2])
+                        {
+                                printf("Veuillez renseigner un process avec l'option -u");
+                        } else
+                        {
+				unsigned int processId = atoi(argv[2]);
+				if (processId != 0)
+				{
+                                	singleProcessInfo(processId);
+				} else
+				{
+					printf("Erreur au niveau du PID");
+				}
+                        }			
 		}
 		
-	}else
+	}else // no argument provided
 	{
 		GetProcessInfo();
 	}
