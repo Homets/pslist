@@ -16,21 +16,21 @@ BOOL singleProcessInfo(DWORD processID)
 	if (hModSnap == INVALID_HANDLE_VALUE)
 	{
 		printf("Le PID n'existe pas ou vous n'avez pas les droits suffisant");
+		CloseHandle(hModSnap);
+		return ( FALSE );
 	}
 	if (!Module32First(hModSnap, &me32))
 	{
 		CloseHandle(hModSnap);
+		return ( FALSE );
 	}
 	//get information about the process
+	printf("Name\t\t\tSize\t\tAddress\n");
 	do
 	{
-		_tprintf( TEXT("\n\n     MODULE NAME:     %s"),   me32.szModule );
-    		_tprintf( TEXT("\n     Executable     = %s"),     me32.szExePath );
-    		_tprintf( TEXT("\n     Process ID     = 0x%08X"),         me32.th32ProcessID );
-    		_tprintf( TEXT("\n     Ref count (g)  = 0x%04X"),     me32.GlblcntUsage );
-		_tprintf( TEXT("\n     Ref count (p)  = 0x%04X"),     me32.ProccntUsage );
+		_tprintf( TEXT("%s\t\t%d\t\t0x%08X\n"), me32.szModule,me32.modBaseSize, (DWORD) me32.modBaseAddr );
 	} while (Module32Next(hModSnap, &me32));
 	
 	CloseHandle(hModSnap);
-	return ( FALSE );
+	return ( TRUE );
 }

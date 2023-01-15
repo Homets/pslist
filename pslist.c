@@ -4,11 +4,12 @@
 #include <tchar.h>
 #include <string.h>
 #include <stdlib.h>
+#include "single_process_info.c"
 
 typedef int bool;
 
 
-extern BOOL singleProcessInfo(DWORD processID);
+//extern BOOL singleProcessInfo(DWORD processID);
 
 
 int main(int argc, char *argv[])
@@ -27,7 +28,7 @@ int main(int argc, char *argv[])
 			show_user = 1;
 			if (!argv[2])
 			{
-				printf("Veuillez renseigner un utilisateur avec l'option -u");
+				printf("L'option -u nécessitede renseigner un nom d'utilisateur");
 			} else
 			{
 				const char *username = argv[2];
@@ -38,7 +39,7 @@ int main(int argc, char *argv[])
 		{
 			if (!argv[2])
                         {
-                                printf("Veuillez renseigner un process avec l'option -u");
+                                printf("L'option --module nécessite de renseigner un PID");
                         } else
                         {
 				unsigned int processId = atoi(argv[2]);
