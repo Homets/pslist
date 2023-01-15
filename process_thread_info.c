@@ -31,16 +31,17 @@ BOOL processThreadInfo(DWORD processID)
 	}
 
 	//display information
+	printf("TID\tPRI\n");
 	do
 	{
 		
-		_tprintf( TEXT("%d\t\t%ld"), te32.th32ThreadID, );
+		_tprintf( TEXT("%d\t%ld\n"), te32.th32ThreadID, te32.tpBasePri);
 
 
 	} while(Thread32Next(hThreadSnapshot, &te32));
 
 
-	CloseHandle(hThreadSnaoshot);
+	CloseHandle(hThreadSnapshot);
 	return (TRUE );
 
 }

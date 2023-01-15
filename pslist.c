@@ -5,11 +5,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include "single_process_info.c"
+#include "process_thread_info.c"
 
 typedef int bool;
 
-
-//extern BOOL singleProcessInfo(DWORD processID);
 
 
 int main(int argc, char *argv[])
@@ -51,6 +50,25 @@ int main(int argc, char *argv[])
 					printf("Erreur au niveau du PID");
 				}
                         }			
+		}else if (strcmp(argv[1], "-p") == 0)
+		{
+			if (!argv[2])
+			{
+				printf("L'option -p nécessite de renseigner un PID");
+
+			} else
+			{
+				unsigned int processId = atoi(argv[2]);
+				if (processId != 0)
+				{
+					processThreadInfo(processId);
+				}else
+				{
+					printf("Erreur au niveau du PID");
+				}
+
+			}
+
 		}
 		
 	}else // no argument provided
