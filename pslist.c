@@ -3,6 +3,7 @@
 #include <tlhelp32.h>
 #include <tchar.h>
 #include <string.h>
+#include <processthreadsapi.h>
 #include <stdlib.h>
 #include "single_process_info.c"
 #include "process_thread_info.c"
@@ -71,7 +72,7 @@ int main(int argc, char *argv[])
 
 		}
 		
-	}else // no argument provided
+	}else // no argument providede32e32e32
 	{
 		GetProcessInfo();
 	}
@@ -123,17 +124,13 @@ BOOL GetProcessInfo(const char *username)
 		FILETIME processUserTime;
 		SYSTEMTIME creationSystemTime;
 			
-
-		if(!GetProcessTime(hProcess, &processCreationTime, &processExitTime, &processKernelTime, &processUserTime))
+		if(!GetProcessTimes(hProcess, &processCreationTime, &processExitTime, &processKernelTime, &processUserTime))
 		{
 			
 			printf("Error retrieving time");
 		}
 
 		FileTimeToSystemTime(&processCreationTime, &creationSystemTime);
-
-		
-
 
 
 		_tprintf( TEXT("\n%ld\t%d\t%d\t%ld\t%d\t%s\t%02d:%02d:%02d:%03d"),
