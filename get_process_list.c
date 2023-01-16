@@ -48,7 +48,7 @@ BOOL GetProcessInfo()
 		FILETIME processKernelTime;
 		FILETIME processUserTime;
 		SYSTEMTIME creationSystemTime;
-			
+		char *cmdline = GetCommandLineA();
 		if(!GetProcessTimes(hProcess, &processCreationTime, &processExitTime, &processKernelTime, &processUserTime))
 		{
 			printf("Error retrieving time");
@@ -56,14 +56,14 @@ BOOL GetProcessInfo()
 		FileTimeToSystemTime(&processCreationTime, &creationSystemTime);
 
 		
-		_tprintf( TEXT("\n%ld\t%d\t%d\t%ld\t%d\t%s\t%02d:%02d:%02d:%03d"),
+		_tprintf( TEXT("\n%ld\t%d\t%d\t%ld\t%d\t%s\t%02d:%02d:%02d:%03d\t%s"),
 				pe32.th32ProcessID,  		//PID
 				pe32.th32ParentProcessID, 	//PPID
 				pe32.pcPriClassBase,		//Priority
 				pe32.cntThreads,		//Thread Number
 				handleCount,			//Count of Handle
 				pe32.szExeFile,
-				creationSystemTime.wHour, creationSystemTime.wMinute, creationSystemTime.wSecond, creationSystemTime.wMilliseconds);		//Executable name
+				creationSystemTime.wHour, creationSystemTime.wMinute, creationSystemTime.wSecond, creationSystemTime.wMilliseconds, cmdline);		//Executable name
 		CloseHandle(hProcess);
 	}while (Process32Next ( hProcessSnap, &pe32));
 	CloseHandle(hProcessSnap);
