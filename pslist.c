@@ -1,7 +1,8 @@
 #include "pslist.h"
 #include "single_process_info.c"
-#include "process_thread_info.c"
+#include "get_process_thread.c"
 #include "get_process_list.c"
+#include "get_specific_process.c"
 
 
 
@@ -63,10 +64,19 @@ int main(int argc, char *argv[])
 
 			}
 
+		} else { 		//pslist.exe explorer
+			if (!argv[2])
+			{
+				char *process_name = argv[1];
+				GetSpecificProcess(process_name);
+			}else {
+				printf("  Erreur arguement \"%s\".\t Essayer pslist.exe -h pour plus d'informations", argv[2]);
+
+			}
+			
 		}
 		
-	}else // no argument providede32e32e32
-	{
+	}else { // no argument provided
 		GetProcessInfo();
 	}
 	return 0;

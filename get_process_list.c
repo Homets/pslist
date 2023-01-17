@@ -13,7 +13,7 @@ BOOL GetProcessInfo()
 
 	//Get an entry to the each process
 	PROCESSENTRY32 pe32;
-	pe32.dwSize =sizeof(PROCESSENTRY32);
+	pe32.dwSize = sizeof(PROCESSENTRY32);
 	
 	if( !Process32First( hProcessSnap, &pe32 ) )
   	{	
@@ -74,14 +74,14 @@ BOOL GetProcessInfo()
 		}else
 		{
 			        _tprintf( TEXT("%ld\t%d\t%d\t%ld\t%s\t%s\t\t%s\t%s\n"),
-                                	pe32.th32ProcessID,                     //PID
-                                	pe32.th32ParentProcessID,               //PPID
-                                	pe32.pcPriClassBase,                    //Priority
-                                	pe32.cntThreads,                        //Thread Number
+                                	pe32.th32ProcessID,
+                                	pe32.th32ParentProcessID,
+                                	pe32.pcPriClassBase,
+                                	pe32.cntThreads,
                                 	ERROR_PROCESS_ACCESS,
                                 	ERROR_PROCESS_ACCESS,
-                                	pe32.szExeFile,                         //Executable name
-                                	ERROR_TIME_ACCESS);            //Creation Time
+                                	pe32.szExeFile,
+                                	ERROR_TIME_ACCESS);        
 		}
 		CloseHandle(hProcess);
 
