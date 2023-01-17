@@ -1,15 +1,8 @@
-#include <stdio.h>
-#include <windows.h>
-#include <tlhelp32.h>
-#include <tchar.h>
-#include <string.h>
-#include <processthreadsapi.h>
-#include <stdlib.h>
+#include "pslist.h"
 #include "single_process_info.c"
 #include "process_thread_info.c"
 #include "get_process_list.c"
 
-typedef int bool;
 
 
 int main(int argc, char *argv[])
