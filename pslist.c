@@ -1,5 +1,5 @@
 #include "pslist.h"
-#include "single_process_info.c"
+#include "get_module_info.c"
 #include "get_process_thread.c"
 #include "get_process_list.c"
 #include "get_specific_process.c"
