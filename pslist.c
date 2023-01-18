@@ -15,7 +15,12 @@ int main(int argc, char *argv[])
 	{	
 		if (strcmp(argv[1], "-h") == 0) 	//pslist.exe -h
 		{
-			printf("Usage => jfjfkf");
+			printf("\nAffiche la liste des processus en cours\n\n
+				Usage : pslist.exe [OPTION | PROCESS NAME]\n\n
+				 -h\tAffiche ce message d'aide\n
+				 -p PID\t Affiche tous les threads 
+				 --module PID\tAffiche les modules lié a ce processus\t
+				 ");
 
 		} else if (strcmp(argv[1],"-u") == 0) 	//pslist.exe -u username
 		{
