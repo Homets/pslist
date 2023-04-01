@@ -1,6 +1,11 @@
 @echo off
 
-cd ../src/
-cl.exe pslist.c
-cd ../
-rd pslist.obj
+cl.exe ../src/pslist.c
+move pslist.exe ..
+del pslist.obj
+
+if exist "../pslist.exe" (
+echo "file compiled successfuly."
+) else (
+ echo "error in compilation."
+)
